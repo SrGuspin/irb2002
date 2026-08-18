@@ -33,7 +33,7 @@ echo "=== 3/5  Clonando paquetes de TurtleBot3 (rama jazzy) ==="
 mkdir -p $WS/src
 cd $WS/src
 
-# NOTA: para que la grabacion siga funcionando dentro de un ano, conviene
+# NOTA: para que la grabacion siga funcionando a futuro, conviene
 # fijar el commit exacto. Despues de verificar que todo corre, ejecuta
 # 'git rev-parse HEAD' en cada repo y reemplaza la rama por ese commit.
 [ -d turtlebot3 ]             || git clone -b jazzy https://github.com/ROBOTIS-GIT/turtlebot3.git

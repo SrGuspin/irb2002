@@ -1,6 +1,6 @@
-# Paquetes de ros2
+# Paquetes de ROS 2
 
-Ahora, para crear sus propios codigos, paquetes y algoritmos deben de crear su paquete de ros2.
+Ahora, para crear sus propios códigos, paquetes y algoritmos, deben crear su paquete de ROS 2.
 
 Primer paso:
 
@@ -8,7 +8,7 @@ Crear carpeta donde vamos a trabajar
 
 ```bash
 mkdir -p ~/ros2_ws/src
-cd cd ~/ros2_ws/src
+cd ~/ros2_ws/src
 ```
 
 Segundo paso: crear paquete de python
@@ -23,12 +23,12 @@ ros2 pkg create --build-type ament_python --license Apache-2.0 mi_paquete
 Con dependencias declaradas desde el inicio:
 
 ```bash
-ros2 pkg create mi_paquete --build-type ament_python --license Apache-2.0 --dependencies rclpy std_msgs 
+ros2 pkg create mi_paquete --build-type ament_python --license Apache-2.0 --dependencies rclpy std_msgs
 ```
 
 Estructura generada:
 
-```
+```text
 mi_paquete/
 ├── mi_paquete/
 │   └── __init__.py        # aquí van los .py de tus nodos
@@ -42,7 +42,7 @@ mi_paquete/
 
 ## setup.py
 
-Este archivo declara dos cosas criticas: registrar ejecutables e instalar la carpeta de launch files.
+Este archivo declara dos cosas críticas: registrar ejecutables e instalar la carpeta de launch files.
 
 ## Compilar
 
@@ -54,7 +54,7 @@ colcon build --symlink-install                            # compila todo
 colcon build --packages-select mi_paquete                 # solo un paquete
 ```
 
-Compila **siempre desde la raíz del workspace** (`~/ros2_ws`), nunca desde `src/`.
+Compilen **siempre desde la raíz del workspace** (`~/ros2_ws`), nunca desde `src/`.
 
 ### Cargar el overlay
 
@@ -68,12 +68,10 @@ source ~/ros2_ws/install/setup.bash
 ros2 run mi_paquete mover
 ```
 
-(deben de correr antes el simulador mossstrado en instalacion.md :p)
+(deben correr antes el simulador mostrado en [instalacion.md](instalacion.md) :p)
 
-Como generalmente uno quiere correr varios nodos o cosas a la vez, tenemos los archivos launch!
+Como generalmente uno quiere correr varios nodos o cosas a la vez, ¡tenemos los archivos launch!
 
 ```bash
-
 ros2 launch mi_paquete demo.launch.py
-
 ```
