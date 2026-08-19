@@ -6,6 +6,27 @@ TurtleBot3 simulado en Gazebo.
 > Esta cápsula tiene como objetivo **introducirlos** a ROS 2. **No es un reemplazo del curso
 > de Robótica Móvil.**
 
+## Cómo usar este repo
+
+Este repo **es un workspace de colcon**, así que se clona y se trabaja adentro:
+
+```bash
+git clone https://github.com/SrGuspin/irb2002.git ~/irb2002
+cd ~/irb2002
+```
+
+El nombre de la carpeta es libre — si prefieren otro, sólo reemplacen `~/irb2002` en el resto
+de la documentación.
+
+> [`src/mi_paquete/`](src/mi_paquete) es **material de lectura**. Está para que lo lean, lo
+> corran y le copien lo que necesiten. El paquete de ustedes va **al lado, con otro nombre**,
+> siguiendo [`docs/paquetes.md`](docs/paquetes.md); si ambos se llaman igual, ROS no sabe cuál
+> ejecutar.
+
+El simulador vive en un workspace aparte (`~/turtlebot3_ws`, lo crea
+[`docs/setup_entorno.sh`](docs/setup_entorno.sh)). Cómo se encadenan los dos está explicado en
+[Cargar los overlays](docs/paquetes.md#cargar-los-overlays).
+
 ## Requisitos
 
 - Ubuntu 24.04
@@ -22,16 +43,20 @@ Todo el detalle está en [`docs/instalacion.md`](docs/instalacion.md).
 | [`docs/basics.md`](docs/basics.md) | Conceptos base: nodos, tópicos, servicios, acciones y parámetros |
 | [`docs/paquetes.md`](docs/paquetes.md) | Crear tu propio paquete, compilarlo con `colcon` y ejecutarlo |
 | [`docs/setup_entorno.sh`](docs/setup_entorno.sh) | Script que instala Gazebo y clona los paquetes de TurtleBot3 |
-| [`src/mi_paquete/`](src/mi_paquete) | Paquete de ejemplo: nodo publisher, nodo subscriber y un launch file |
+| [`src/mi_paquete/`](src/mi_paquete) | Paquete de ejemplo (material de lectura): nodo publisher, nodo subscriber y un launch file |
 
 ## Uso rápido
 
-Compilar el paquete desde la raíz del workspace (nunca desde `src/`):
+Compilar desde la raíz del workspace (nunca desde `src/`) y cargar el overlay:
 
 ```bash
+cd ~/irb2002
 colcon build --packages-select mi_paquete
 source install/setup.bash
 ```
+
+Esto asume que ROS 2 y `~/turtlebot3_ws` ya están cargados; si no, ver
+[Cargar los overlays](docs/paquetes.md#cargar-los-overlays).
 
 Ejecutar el nodo que mueve el robot (el simulador debe estar corriendo, ver
 [`docs/instalacion.md`](docs/instalacion.md)):
