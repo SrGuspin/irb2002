@@ -30,19 +30,36 @@ Estructura generada:
 
 ```text
 mi_paquete/
+├── LICENSE                 # lo genera el argumento --license
 ├── mi_paquete/
-│   └── __init__.py        # aquí van los .py de tus nodos
+│   └── __init__.py         # aquí van los .py de tus nodos
+├── package.xml             # metadatos y dependencias
 ├── resource/
 │   └── mi_paquete
-├── test/
-├── package.xml            # metadatos y dependencias
-├── setup.py               # instalación y entry points
-└── setup.cfg
+├── setup.cfg
+├── setup.py                # instalación y entry points
+└── test/                   # linters que corre `colcon test`
+    ├── test_copyright.py
+    ├── test_flake8.py
+    └── test_pep257.py
 ```
 
 ## setup.py
 
 Este archivo declara dos cosas críticas: registrar ejecutables e instalar la carpeta de launch files.
+
+La parte más destacable para esta guía es el `entry_points`:
+
+```python
+    entry_points={
+        'console_scripts': [
+            'mover = mi_paquete.mover_robot:main',
+            'lidar = mi_paquete.leer_lidar:main',
+        ],
+    },
+```
+
+Esta entrada nos da los dos comandos a usar en `ros2 run`; sin ella, `mover` y `lidar` no tienen ningún significado.
 
 ## Compilar
 
@@ -66,7 +83,13 @@ source ~/ros2_ws/install/setup.bash
 
 ```bash
 ros2 run mi_paquete mover
+ros2 run mi_paquete lidar
 ```
+
+> Hay dos códigos de ejemplo, `mover` y `lidar`:
+>
+> - `mover`: simplemente hace que el robot gire en círculos.
+> - `lidar`: lee el LiDAR y entrega algunos datos :D
 
 (deben correr antes el simulador mostrado en [instalacion.md](instalacion.md) :p)
 

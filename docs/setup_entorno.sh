@@ -42,7 +42,29 @@ cd $WS/src
 
 echo "=== 4/5  Compilando el workspace ==="
 cd $WS
-rosdep install --from-paths src --ignore-src -r -y || true
+
+# rosdep resuelve las dependencias declaradas en los package.xml.
+# Necesita estar instalado e inicializado; si no lo esta, el install de mas
+# abajo falla y el error recien aparece durante el colcon build, donde no se
+# entiende de donde viene.
+if ! command -v rosdep >/dev/null 2>&1; then
+    echo "rosdep no esta instalado, instalandolo..."
+    sudo apt install -y python3-rosdep
+fi
+
+# 'rosdep init' se corre una sola vez por maquina; si ya esta, se salta.
+if [ ! -f /etc/ros/rosdep/sources.list.d/20-default.list ]; then
+    sudo rosdep init
+fi
+rosdep update
+
+if ! rosdep install --from-paths src --ignore-src -r -y; then
+    echo ""
+    echo "AVISO: rosdep no pudo resolver todas las dependencias (ver el error arriba)."
+    echo "       Seguimos igual, pero si el colcon build falla, la causa esta aca."
+    echo ""
+fi
+
 colcon build --symlink-install
 
 echo "=== 5/5  Configurando el .bashrc ==="
