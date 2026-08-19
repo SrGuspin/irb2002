@@ -33,6 +33,7 @@ setup(
     entry_points={
         'console_scripts': [
             'mover = mi_paquete.mover_robot:main',
+            'lidar = mi_paquete.leer_lidar:main',
         ],
     },
 )

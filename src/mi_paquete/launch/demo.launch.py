@@ -10,8 +10,10 @@ from launch.actions import (
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 # Esto fue generado por claude :p
+
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -49,6 +51,12 @@ def generate_launch_description():
         name='mover',
         output='screen',
         emulate_tty=True,
+        # use_sim_time le dice al nodo que use el reloj de Gazebo (/clock)
+        # en vez del reloj del computador. ParameterValue con value_type=bool
+        # es necesario porque LaunchConfiguration entrega el texto 'true'.
+        parameters=[{
+            'use_sim_time': ParameterValue(use_sim_time, value_type=bool),
+        }],
     )
 
     # Se espera un poco para que Gazebo y el robot esten listos
