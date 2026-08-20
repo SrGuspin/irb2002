@@ -129,3 +129,11 @@ Como generalmente uno quiere correr varios nodos o cosas a la vez, ¡tenemos los
 ```bash
 ros2 launch mi_paquete demo.launch.py
 ```
+
+## Paquetes de la comunidad
+
+Dado que ROS 2 es open source, tiene un montón de paquetes de la comunidad. Para la simulación les recomiendo buscar nav2: para su proyecto es muy probable que sea overkill, pero es bueno saber de su existencia ;)
+<https://docs.nav2.org/>
+
+Les dejo el link de otra página, de un usuario que escribió varios algoritmos de robótica en Python, por si quieren implementarlos en su proyecto.
+<https://github.com/AtsushiSakai/PythonRobotics>
